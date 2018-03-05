@@ -1,6 +1,15 @@
 from Tkinter import *
 import backend
 
+
+def view_command():
+	list1.delete(0,END)
+	for row in backend.view():
+		list1.insert(END,row)
+
+def add_command():
+	backend.insert(title_text.get(),number_text.get())
+
 window=Tk()
 
 l1=Label(window,text="Title")
@@ -14,7 +23,7 @@ e1=Entry(window,textvariable=title_text)
 e1.grid(row=0,column=1)
 
 number_text=StringVar()
-e1=Entry(window,textvariable=title_text)
+e1=Entry(window,textvariable=number_text)
 e1.grid(row=0,column=3)
 
 list1=Listbox(window,height=6,width=35)
@@ -26,10 +35,10 @@ sb1.grid(row=2,column=2,rowspan=6)
 list1.configure(yscrollcommand=sb1.set)
 sb1.configure(command=list1.yview)
 
-b1=Button(window,text="View all",width=12)
+b1=Button(window,text="View all",width=12,command=view_command)
 b1.grid(row=2,column=3)
 
-b1=Button(window,text="Add",width=12)
+b1=Button(window,text="Add",width=12,command=add_command)
 b1.grid(row=3,column=3)
 
 b1=Button(window,text="Update",width=12)
